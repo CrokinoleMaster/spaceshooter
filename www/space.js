@@ -10,40 +10,51 @@ function SpaceShooter(){
     $('#score').html(canvas.score);
     this.start = function(){
         $(canvas).on('lost', function(){
+            $('#start').prop('disabled', false);
             canvas.init();
             $('canvas').css({'background-color': '#23112A', cursor: 'default'});
             $menu.find('h1').text('GAME OVER');
+            $menu.find('#start').text('TRY AGAIN');
             $menu.fadeIn('fast');
         });
         $menu.on('click', '#start', function(){
+            $(this).prop('disabled', true);
             $('canvas').css({'background-color': '#23112A', cursor: 'none'});
             $menu.fadeOut('fast');
             play();
         });
     };
     function play(){
+        var timeout;
+        var timeout2;
+        var timeout3;
         canvas.init();
-        window.setTimeout(function render(){
+        (function draw(){
             canvas.play();
             if (canvas.lost == false){
-                window.setTimeout(render, 13);
+                timeout = window.setTimeout(draw, 13);
             }
             else{
                 $(canvas).trigger('lost');
+                window.clearTimeout(timeout);
+                window.clearTimeout(timeout2);
+                window.clearTimeout(timeout3);
             }
-        }, 13);
-        window.setTimeout(function add(){
+        })();
+        (function add(){
             canvas.autoEnemies();
             if (canvas.lost == false){
-                window.setTimeout(add, canvas.gameSpeed);
+                timeout2 = window.setTimeout(add, canvas.gameSpeed);
             }
-        }, canvas.gameSpeed);
-        window.setTimeout(function shoot(){
+        })();
+        (function shoot(){
             canvas.addEnemyLasers();
             if (canvas.lost == false){
-                window.setTimeout(shoot, 1000);
+                timeout3 = window.setTimeout(shoot, 1000);
             }
-        }, 1000);
+
+
+        })();
     }
 
 }
@@ -113,8 +124,7 @@ function Canvas(){
         this.drawEnemies();
         this.drawEnemyLaser();
         ship.draw();
-        this.gameSpeed = 1000-this.score;
-        console.log(this.lives);
+        this.gameSpeed = 1000-this.score*2;
     };
 
     this.addStars = function(){
