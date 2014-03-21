@@ -11,7 +11,7 @@ function SpaceShooter(){
     this.start = function(){
         $(canvas).on('lost', function(){
             $('#start').prop('disabled', false);
-            canvas.init();
+            $('#score').css('color', '#C81E32');
             $('canvas').css({'background-color': '#23112A', cursor: 'default'});
             $menu.find('h1').text('GAME OVER');
             $menu.find('#start').text('TRY AGAIN');
@@ -19,6 +19,7 @@ function SpaceShooter(){
         });
         $menu.on('click', '#start', function(){
             $(this).prop('disabled', true);
+            $('#score').css('color', '#97B8B6');
             $('canvas').css({'background-color': '#23112A', cursor: 'none'});
             $menu.fadeOut('fast');
             play();
