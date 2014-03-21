@@ -112,6 +112,7 @@ function Canvas(){
             });
         });
         $('#score').html(canvas.score);
+        $('#lives').html(canvas.lives);
 
     };
 
@@ -216,6 +217,7 @@ function Canvas(){
     }
 
     function checkEnemyHit(){
+        var intervalId;
         enemyLasers.forEach(function(laser){
             if (Math.abs(laser.x-ship.x)<10 && Math.abs(laser.y-(ship.y)) < 5){
                 canvas.lives--;
@@ -223,14 +225,14 @@ function Canvas(){
                 if (canvas.lives ==0){
                     canvas.lost =true;
                 }
-                var intervalId = window.setInterval(function(){
+                intervalId = window.setInterval(function(){
                     ship.explode();
-                },13);
+                },5);
                 window.setTimeout(function(){
                     window.clearInterval(intervalId);
-                },500);
+                },200);
             }
-        })
+        });
     }
 
     function drawExplosion(x, y){
