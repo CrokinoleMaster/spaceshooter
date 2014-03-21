@@ -46,7 +46,7 @@ function Enemy(canvas){
     var moveCap = Math.floor(Math.random()*200);
     var direction = Math.round(Math.random())<1? -1: 1;
     this.moves = [];
-    this.x = canvas.width/2+Math.random()*canvas.width/2;
+    this.x = Math.random()*canvas.width;
     this.y = 10;
     this.move1 = function(){
         if (moveCount ==moveCap){
