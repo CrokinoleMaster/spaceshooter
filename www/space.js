@@ -105,16 +105,17 @@ function Canvas(){
         stars.forEach(function(star){
             star.draw();
         });
+        $canvas.off('click');
         $canvas.on('click', function(e){
             var laser = new Laser(canvas, ship);
             lasers.push(laser);
             $(lasers[lasers.length-1]).on('hit', function(){
+                console.log("hit");
                 lasers.remove(lasers.indexOf(laser));
             });
         });
         $('#score').html(canvas.score);
         $('#lives').html(canvas.lives);
-
     };
 
     this.play = function(){
