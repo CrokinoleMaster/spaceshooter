@@ -126,7 +126,7 @@ function Canvas(){
         this.drawEnemies();
         this.drawEnemyLaser();
         ship.draw();
-        this.gameSpeed = 1000-this.score*2;
+        this.gameSpeed = 1000-this.score;
     };
 
     this.addStars = function(){
