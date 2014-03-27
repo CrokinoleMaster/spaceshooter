@@ -67,7 +67,7 @@ function Enemy(canvas){
             this.x+=1*direction;
             moveCount++;
         }
-        this.y+=Math.random()*5;
+        this.y+=Math.random()*2;
     }
     this.draw = function(){
         var x = this.x;
